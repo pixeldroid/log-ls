@@ -43,7 +43,7 @@ package pixeldroid.util
         }
 
         /**
-            Test for interchangeablility between LogLevel instances.
+            Test for interchangeability between LogLevel instances.
 
             Two different instantiations of LogLevel will not formally equate to each other,
             but can be considered equivalent if they represent the same log level.

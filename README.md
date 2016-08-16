@@ -85,7 +85,7 @@ package
             Log.info(_logName, function():String { return 'log level: ' +Config.logLevel; });
             Log.info(_logName, function():String { return 'my string: ' +Config.getString('my_string'); });
             Log.info(_logName, function():String { return 'my number: ' +Config.getNumber('my_number'); });
-            Log.info(_logName, function():String { return 'my integer: ' +Config.getNumber('my_integer'); });
+            Log.info(_logName, function():String { return 'my integer: ' +Config.getInteger('my_integer'); });
         }
     }
 }

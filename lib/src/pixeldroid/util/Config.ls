@@ -3,7 +3,7 @@ package pixeldroid.util
     import pixeldroid.util.LogLevel;
 
     /**
-        Provides access to configuration values defined in assets/app.config
+        Provides access to configuration values defined in `assets/app.config`.
     */
     class Config
     {
@@ -35,6 +35,9 @@ package pixeldroid.util
             return _fileContents;
         }
 
+        /**
+            Reload the config values from file.
+        */
         public static function refresh():void
         {
             _fileContents = null;
