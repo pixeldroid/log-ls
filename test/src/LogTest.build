@@ -1,0 +1,21 @@
+{
+  "name": "LogTest",
+  "version": "1.0",
+  "outputDir": "bin",
+  "references": [
+    "System",
+    "Spec",
+    "Log"
+  ],
+  "modules": [
+    {
+      "name": "LogTest",
+      "version": "1.0",
+      "sourcePath": [
+        "app",
+        "spec"
+      ]
+    }
+  ],
+  "executable": true
+}
