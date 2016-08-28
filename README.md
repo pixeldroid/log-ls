@@ -9,7 +9,7 @@ a simple logging framework for Loom, plus a handy config reader
 Download the library into its matching sdk folder:
 
     $ curl -L -o ~/.loom/sdks/sprint34/libs/Log.loomlib \
-        https://github.com/pixeldroid/spec-ls/releases/download/v1.1.5/Log-sprint34.loomlib
+        https://github.com/pixeldroid/log-ls/releases/download/v1.1.5/Log-sprint34.loomlib
 
 To uninstall, simply delete the file:
 
