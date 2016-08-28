@@ -3,7 +3,7 @@ package pixeldroid.util
     /**
         Enumerates the verbosity levels of the logging system, from `NONE` (least verbose) to `DEBUG` (most verbose).
 
-        The order of increasing verbosity is: `NONE` > `FATAL` > `ERROR` > `WARN` > `INFO` > `DEBUG`.
+        The order of increasing verbosity is: `NONE` < `FATAL` < `ERROR` < `WARN` < `INFO` < `DEBUG`.
 
         * `NONE` indicates no logging should occur.
         * `FATAL` allows only messages related to application crashes.
