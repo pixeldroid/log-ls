@@ -17,6 +17,10 @@ package
 
             var it:Thing = Spec.describe('Log');
 
+            it.should('be versioned', function() {
+                it.expects(Log.version).toPatternMatch('(%d+).(%d+).(%d+)', 3);
+            });
+
             it.should('default to ERROR level logging', function() {
                 it.expects(LogLevel.areEquivalent(defaultLevel, LogLevel.ERROR)).toBeTruthy();
             });
