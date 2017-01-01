@@ -1,6 +1,31 @@
 package pixeldroid.util
 {
-    import pixeldroid.util.LogLevel;
+    /**
+        Enumerates the verbosity levels of the logging system, from `NONE` (least verbose) to `DEBUG` (most verbose).
+
+        The order of increasing verbosity is: `NONE` < `FATAL` < `ERROR` < `WARN` < `INFO` < `DEBUG`.
+
+        * `NONE` indicates no logging should occur.
+        * `FATAL` allows only messages related to application crashes.
+        * `ERROR` adds messages related to unexpected results that will break expected behavior.
+        * `WARN` adds messages related to unexpected results that will not break expected behavior.
+        * `INFO` adds messages that track happy path execution.
+        * `DEBUG` adds messages that track program state.
+
+        Use Log.levelToString() to retrieve a text representation of the level.
+
+        @see Log#levelToString
+        @see Log#levelFromString
+    */
+    enum LogLevel
+    {
+        NONE, // 0
+        FATAL,
+        ERROR,
+        WARN,
+        INFO,
+        DEBUG
+    }
 
     /**
         Provides methods for sending formatted log messages at various verbosity levels.
@@ -25,7 +50,7 @@ package pixeldroid.util
 
         public static const defaultFormatter:Formatter = new BasicFormatter();
         public static const defaultPrinter:Printer = new ConsolePrinter();
-        public static const defaultLevel:LogLevel = new LogLevel(2, 'ERROR'); // need to use constructor, as static initialization of this class is prior to availability of member vars in LogLevel
+        public static const defaultLevel:LogLevel = LogLevel.ERROR;
 
         public static var formatter:Formatter = defaultFormatter;
         public static var printer:Printer = defaultPrinter;
@@ -45,7 +70,7 @@ package pixeldroid.util
         */
         public static function debug(label:String, messageGenerator:Function):void
         {
-            if (level.value >= LogLevel.DEBUG.value) processMessage(LogLevel.DEBUG, label, messageGenerator);
+            if (level >= LogLevel.DEBUG) processMessage(LogLevel.DEBUG, label, messageGenerator);
         }
 
         /**
@@ -61,7 +86,7 @@ package pixeldroid.util
         */
         public static function info(label:String, messageGenerator:Function):void
         {
-            if (level.value >= LogLevel.INFO.value) processMessage(LogLevel.INFO, label, messageGenerator);
+            if (level >= LogLevel.INFO) processMessage(LogLevel.INFO, label, messageGenerator);
         }
 
         /**
@@ -77,7 +102,7 @@ package pixeldroid.util
         */
         public static function warn(label:String, messageGenerator:Function):void
         {
-            if (level.value >= LogLevel.WARN.value) processMessage(LogLevel.WARN, label, messageGenerator);
+            if (level >= LogLevel.WARN) processMessage(LogLevel.WARN, label, messageGenerator);
         }
 
         /**
@@ -93,7 +118,7 @@ package pixeldroid.util
         */
         public static function error(label:String, messageGenerator:Function):void
         {
-            if (level.value >= LogLevel.ERROR.value) processMessage(LogLevel.ERROR, label, messageGenerator);
+            if (level >= LogLevel.ERROR) processMessage(LogLevel.ERROR, label, messageGenerator);
         }
 
         /**
@@ -109,7 +134,45 @@ package pixeldroid.util
         */
         public static function fatal(label:String, messageGenerator:Function):void
         {
-            if (level.value >= LogLevel.FATAL.value) processMessage(LogLevel.FATAL, label, messageGenerator);
+            if (level >= LogLevel.FATAL) processMessage(LogLevel.FATAL, label, messageGenerator);
+        }
+
+        /**
+            Convert a log level enumeration into a human-readable string.
+
+            @param value A verbosity enumeration from LogLevel
+        */
+        public static function levelToString(value:LogLevel):String
+        {
+            switch (value)
+            {
+                case LogLevel.NONE : return 'NONE';
+                case LogLevel.FATAL: return 'FATAL';
+                case LogLevel.ERROR: return 'ERROR';
+                case LogLevel.WARN : return 'WARN';
+                case LogLevel.INFO : return 'INFO';
+                case LogLevel.DEBUG: return 'DEBUG';
+            }
+            return 'NONE';
+        }
+
+        /**
+            Convert a human-readable string into a log level enumeration.
+
+            @param value A string matching one of [NONE, FATAL, ERROR, WARN, INFO, DEBUG]
+        */
+        public static function levelFromString(value:String):LogLevel
+        {
+            switch (value.toUpperCase())
+            {
+                case 'NONE' : return LogLevel.NONE;
+                case 'FATAL': return LogLevel.FATAL;
+                case 'ERROR': return LogLevel.ERROR;
+                case 'WARN' : return LogLevel.WARN;
+                case 'INFO' : return LogLevel.INFO;
+                case 'DEBUG': return LogLevel.DEBUG;
+            }
+            return LogLevel.NONE;
         }
 
 
@@ -174,7 +237,7 @@ package pixeldroid.util
             var ss:String = String.lpad(s.toString(), '0', 2);
             var ll:String = String.lpad(l.toString(), '0', 3);
 
-            return hh +':' + mm + ':' + ss + '.' + ll + ' [' + String.lpad(level.toString(), ' ', 5) + '] ' + label + ': ' + message;
+            return hh +':' + mm + ':' + ss + '.' + ll + ' [' + String.lpad(Log.levelToString(level), ' ', 5) + '] ' + label + ': ' + message;
         }
     }
 }

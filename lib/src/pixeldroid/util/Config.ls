@@ -1,5 +1,9 @@
 package pixeldroid.util
 {
+    import system.Debug;
+    import system.JSON;
+    import system.errors.Error;
+
     import pixeldroid.util.LogLevel;
 
     /**
@@ -15,9 +19,9 @@ package pixeldroid.util
         */
         public static function get logLevel():LogLevel
         {
-            var value:String = json.getString('log_level');
+            var level:String = json.getString('log_level');
 
-            return LogLevel.fromString(value);
+            return Log.levelFromString(level);
         }
 
         /**
