@@ -1,36 +1,18 @@
 package pixeldroid.util
 {
-    /**
-        Enumerates the verbosity levels of the logging system, from `NONE` (least verbose) to `DEBUG` (most verbose).
 
-        The order of increasing verbosity is: `NONE` < `FATAL` < `ERROR` < `WARN` < `INFO` < `DEBUG`.
-
-        * `NONE` indicates no logging should occur.
-        * `FATAL` allows only messages related to application crashes.
-        * `ERROR` adds messages related to unexpected results that will break expected behavior.
-        * `WARN` adds messages related to unexpected results that will not break expected behavior.
-        * `INFO` adds messages that track happy path execution.
-        * `DEBUG` adds messages that track program state.
-
-        Use Log.levelToString() to retrieve a text representation of the level.
-
-        @see Log#levelToString
-        @see Log#levelFromString
-    */
-    enum LogLevel
-    {
-        NONE, // 0
-        FATAL,
-        ERROR,
-        WARN,
-        INFO,
-        DEBUG
-    }
+    import pixeldroid.util.log.BasicFormatter;
+    import pixeldroid.util.log.ConsolePrinter;
+    import pixeldroid.util.log.Formatter;
+    import pixeldroid.util.log.LogLevel;
+    import pixeldroid.util.log.Printer;
 
     /**
         Provides methods for sending formatted log messages at various verbosity levels.
 
         Messages that exceed the current verbosity threshold stored in `level` will be ignored.
+        The default level is `INFO` (allowing `INFO`, `WARN`, `ERROR`, and `FATAL` messages, but
+        not `DEBUG`).
 
         A default formatter is provided. Custom formatters can be used by setting
         the value of the `formatter` property to a Formatter-compliant class instance.
@@ -44,13 +26,13 @@ package pixeldroid.util
         message construction in a closure, any costs associated with forming the message
         are avoided for logging calls above the current verbosity threshold (log level).
     */
-    class Log
+    final static class Log
     {
         public static const version:String = '1.0.1';
 
         public static const defaultFormatter:Formatter = new BasicFormatter();
         public static const defaultPrinter:Printer = new ConsolePrinter();
-        public static const defaultLevel:LogLevel = LogLevel.ERROR;
+        public static const defaultLevel:LogLevel = 4; // LogLevel.INFO // static initializer runs before member initialization of imported enum
 
         public static var formatter:Formatter = defaultFormatter;
         public static var printer:Printer = defaultPrinter;
@@ -183,61 +165,6 @@ package pixeldroid.util
             var time:Number = Platform.getTime(); // milliseconds since app launch
             var message:String = messageGenerator() as String;
             printer.print(formatter.format(time, level, label, message));
-        }
-    }
-
-    /**
-        Declares a receiver function for use by the logger.
-    */
-    interface Printer
-    {
-        /**
-            @param message The message to be printed to a log receiver
-        */
-        function print(message:String):void;
-    }
-
-    /**
-        Declares a message formatting function for use by the logger.
-    */
-    interface Formatter
-    {
-        /**
-            @param time The number of milliseconds since app start
-            @param level A `LogLevel` constant representing verbosity of the message
-            @param label A name for the owner of the message
-            @param message The message to be logged
-        */
-        function format(time:Number, level:LogLevel, label:String, message:String):String;
-    }
-
-
-    class ConsolePrinter implements Printer
-    {
-        public function print(message:String):void
-        {
-            Console.print(message);
-        }
-    }
-
-    class BasicFormatter implements Formatter
-    {
-        public function format(time:Number, level:LogLevel, label:String, message:String):String
-        {
-            var h:Number = Math.floor(time / (60 * 60 * 1000));
-            time -= h * (60 * 60 * 1000);
-            var m:Number = Math.floor(time / (60 * 1000));
-            time -= m * (60 * 1000);
-            var s:Number = Math.floor(time / 1000);
-            time -= s * 1000;
-            var l:Number = time;
-
-            var hh:String = String.lpad(h.toString(), '0', 2);
-            var mm:String = String.lpad(m.toString(), '0', 2);
-            var ss:String = String.lpad(s.toString(), '0', 2);
-            var ll:String = String.lpad(l.toString(), '0', 3);
-
-            return hh +':' + mm + ':' + ss + '.' + ll + ' [' + String.lpad(Log.levelToString(level), ' ', 5) + '] ' + label + ': ' + message;
         }
     }
 }

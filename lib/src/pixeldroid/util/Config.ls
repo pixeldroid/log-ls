@@ -4,7 +4,8 @@ package pixeldroid.util
     import system.JSON;
     import system.errors.Error;
 
-    import pixeldroid.util.LogLevel;
+    import pixeldroid.util.Log;
+    import pixeldroid.util.log.LogLevel;
 
     /**
         Provides access to configuration values defined in `assets/app.config`.

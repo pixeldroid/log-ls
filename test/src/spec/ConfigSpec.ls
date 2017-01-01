@@ -4,7 +4,7 @@ package
     import pixeldroid.bdd.Thing;
 
     import pixeldroid.util.Config;
-    import pixeldroid.util.LogLevel;
+    import pixeldroid.util.log.LogLevel;
 
 
     public static class ConfigSpec

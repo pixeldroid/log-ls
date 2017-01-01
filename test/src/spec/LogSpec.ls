@@ -4,8 +4,8 @@ package
     import pixeldroid.bdd.Thing;
 
     import pixeldroid.util.Log;
-    import pixeldroid.util.LogLevel;
-    import pixeldroid.util.Printer;
+    import pixeldroid.util.log.LogLevel;
+    import pixeldroid.util.log.Printer;
 
 
     public static class LogSpec
@@ -19,7 +19,7 @@ package
             before();
 
             it.should('be versioned', be_versioned);
-            it.should('default to ERROR level logging', default_to_error);
+            it.should('default to INFO level logging', default_to_info);
             it.should('provide a default format for time, level, label, and message', provide_default_format);
             it.should('provide a set of increasing verbosity levels', provide_levels);
             it.should('not log messages more verbose than the current log level', ignore_higher_levels);
@@ -38,10 +38,11 @@ package
             it.expects(Log.version).toPatternMatch('(%d+).(%d+).(%d+)', 3);
         }
 
-        private static function default_to_error():void
+        private static function default_to_info():void
         {
-            it.expects(initialLevel).toEqual(LogLevel.ERROR);
+            it.expects(initialLevel).toEqual(LogLevel.INFO);
             it.expects(initialLevel).toEqual(Log.defaultLevel);
+            it.expects(Log.defaultLevel).not.toBeNull();
         }
 
         private static function provide_default_format():void
