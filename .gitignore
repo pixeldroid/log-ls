@@ -2,3 +2,5 @@ lib/build/
 releases/
 test/bin/
 test/TEST-*.xml
+logfile.log
+cli/bin
