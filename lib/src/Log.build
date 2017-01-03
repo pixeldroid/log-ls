@@ -1,6 +1,6 @@
 {
   "name": "Log",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "outputDir": "build",
   "references": [
     "System"
@@ -8,7 +8,7 @@
   "modules": [
     {
       "name": "Log",
-      "version": "1.0.1",
+      "version": "2.0.0",
       "sourcePath": [
         "."
       ]

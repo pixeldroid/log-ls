@@ -28,7 +28,7 @@ package pixeldroid.util
     */
     final static class Log
     {
-        public static const version:String = '1.0.1';
+        public static const version:String = '2.0.0';
 
         public static const defaultFormatter:Formatter = new BasicFormatter();
         public static const defaultPrinter:Printer = new ConsolePrinter();
