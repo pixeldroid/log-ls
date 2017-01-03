@@ -2,6 +2,7 @@ package pixeldroid.util.log
 {
 
     import system.Console;
+    import pixeldroid.util.log.Printer;
 
     /**
         Provides a simple console logger for use by Log.

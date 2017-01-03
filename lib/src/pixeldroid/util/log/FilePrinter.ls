@@ -3,6 +3,8 @@ package pixeldroid.util.log
 
     import system.platform.File;
 
+    import pixeldroid.util.log.Printer;
+
     /**
         Provides a simple message limited file logger for use by Log.
 
@@ -15,9 +17,9 @@ package pixeldroid.util.log
     */
     class FilePrinter implements Printer
     {
-        private var data:Vector.<String> = [];
         private var _logfile:String = 'logfile.log';
         private var _messageLimit:Number = 200;
+        protected var data:Vector.<String> = [];
 
 
         public function print(message:String):void
@@ -37,10 +39,10 @@ package pixeldroid.util.log
         public function append(message:String):void
         {
             var n:Number = data.length - 1;
-            if (n < 1) print(message);
+            if (n < 0) print(message);
             else
             {
-                data[n] += ' ' +message;
+                data[n] = data[n] +' ' +message;
                 save();
             }
         }
@@ -55,7 +57,7 @@ package pixeldroid.util.log
         public function replace(message:String):void
         {
             var n:Number = data.length - 1;
-            if (n < 1) print(message);
+            if (n < 0) print(message);
             else
             {
                 data[n] = message;
@@ -95,7 +97,7 @@ package pixeldroid.util.log
         public function get logfile():String { return _logfile; }
 
 
-        private function save():Boolean
+        protected function save():Boolean
         {
             return File.writeTextFile(_logfile, data.join('\n') + '\n');
         }
