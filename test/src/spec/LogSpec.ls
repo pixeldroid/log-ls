@@ -7,11 +7,15 @@ package
     import pixeldroid.util.log.LogLevel;
     import pixeldroid.util.log.Printer;
 
+    import LogStatePreserver;
+    import TestPrinter;
 
-    public static class LogSpec
+
+    public static final class LogSpec
     {
         private static const it:Thing = Spec.describe('Log');
         private static const testPrinter:TestPrinter = new TestPrinter();
+        private static const wrap:Function = LogStatePreserver.wrap;
         private static var initialLevel:LogLevel;
 
         public static function describe():void
@@ -20,17 +24,15 @@ package
 
             it.should('be versioned', be_versioned);
             it.should('default to INFO level logging', default_to_info);
-            it.should('provide a default format for time, level, label, and message', provide_default_format);
             it.should('provide a set of increasing verbosity levels', provide_levels);
-            it.should('not log messages more verbose than the current log level', ignore_higher_levels);
-            it.should('not compute messages that are not logged', log_lazily);
+            it.should('not log messages more verbose than the current log level', wrap(ignore_higher_levels) as Function);
+            it.should('not compute messages that are not logged', wrap(log_lazily) as Function);
         }
 
 
         private static function before():void
         {
             initialLevel = Log.level;
-            Log.printer = testPrinter;
         }
 
         private static function be_versioned():void
@@ -45,26 +47,6 @@ package
             it.expects(Log.defaultLevel).not.toBeNull();
         }
 
-        private static function provide_default_format():void
-        {
-            var lastLevel:LogLevel = Log.level;
-            Log.level = LogLevel.INFO;
-
-            Log.info('LogSpec', function():String { return 'info message'; });
-
-            // Loom uses Lua regex patterns:
-            //   http://lua-users.org/wiki/PatternsTutorial
-            //   http://www.lua.org/manual/5.2/manual.html#6.4.1
-            var time:String = '^(%d%d:%d%d:%d%d.%d%d%d)';
-            var level:String = '%s(%[%s?%u+%])';
-            var label:String = '%s(.*:)';
-            var message:String = '%s(.*)$';
-
-            it.expects(testPrinter.lastMessage).toPatternMatch(time +level +label +message, 4);
-
-            Log.level = lastLevel;
-        }
-
         private static function provide_levels():void
         {
             it.expects(LogLevel.NONE ).toBeLessThan(LogLevel.FATAL);
@@ -76,7 +58,7 @@ package
 
         private static function ignore_higher_levels():void
         {
-            var lastLevel:LogLevel = Log.level;
+            Log.printer = testPrinter;
 
             Log.level = LogLevel.INFO;
             Log.warn('LogSpec', function():String { return 'warn message'; });
@@ -92,15 +74,14 @@ package
             Log.info ('LogSpec', function():String { return 'info message'; });
             Log.debug('LogSpec', function():String { return 'debug message'; });
             it.expects(testPrinter.lastMessage).toBeEmpty();
-
-            Log.level = lastLevel;
         }
 
         private static function log_lazily():void
         {
-            var lastLevel:LogLevel = Log.level;
             var initialValue:Number = 0;
             var captive:Number = initialValue;
+
+            Log.printer = testPrinter;
 
             Log.level = LogLevel.INFO;
             Log.debug('LogSpec', function():String { captive++; return 'debug message executed'; });
@@ -109,27 +90,6 @@ package
             Log.level = LogLevel.DEBUG;
             Log.debug('LogSpec', function():String { captive++; return 'debug message executed'; });
             it.expects(captive).toEqual(initialValue + 1);
-
-            Log.level = lastLevel;
-        }
-    }
-
-
-    class TestPrinter implements Printer
-    {
-        private var printedMessage:String = '';
-
-        public function print(message:String):void
-        {
-            printedMessage = message;
-        }
-
-        public function get lastMessage():String
-        {
-            var m:String = printedMessage;
-            printedMessage = '';
-
-            return m;
         }
     }
 }

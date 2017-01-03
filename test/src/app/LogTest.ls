@@ -4,8 +4,11 @@ package
 
     import pixeldroid.bdd.SpecExecutor;
 
+    import BasicFormatterSpec;
     import ConfigSpec;
+    import FilePrinterSpec;
     import LogSpec;
+    import MultiPrinterSpec;
 
 
     public class LogTest extends ConsoleApplication
@@ -15,8 +18,11 @@ package
             SpecExecutor.parseArgs();
 
             SpecExecutor.exec([
+                BasicFormatterSpec,
                 ConfigSpec,
-                LogSpec
+                FilePrinterSpec,
+                LogSpec,
+                MultiPrinterSpec
             ]);
         }
     }
