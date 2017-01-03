@@ -1,7 +1,12 @@
 log-ls
 ======
 
-a simple logging framework for Loom, plus a handy config reader
+a simple logging framework for [Loom][loom-sdk], plus a handy config reader
+
+- [installation](#installation)
+- [usage](#usage)
+- [building](#building)
+- [contributing](#contributing)
 
 
 ## installation
@@ -9,7 +14,7 @@ a simple logging framework for Loom, plus a handy config reader
 Download the library into its matching sdk folder:
 
     $ curl -L -o ~/.loom/sdks/sprint34/libs/Log.loomlib \
-        https://github.com/pixeldroid/log-ls/releases/download/v1.0.0/Log-sprint34.loomlib
+        https://github.com/pixeldroid/log-ls/releases/download/v2.0.0/Log-sprint34.loomlib
 
 To uninstall, simply delete the file:
 
@@ -91,11 +96,12 @@ package
 }
 ```
 
-## working from source
 
-first install [loomtasks][loomtasks]
+## building
 
-### compiling
+first, install [loomtasks][loomtasks] and the [spec-ls library][spec-ls]
+
+### compiling from source
 
     $ rake lib:install
 
@@ -113,4 +119,6 @@ this will build the Log library, install it in the currently configured sdk, bui
 Pull requests are welcome!
 
 
-[loomtasks]: https://github.com/pixeldroid/loomtasks "loomtasks"
+[loom-sdk]: https://github.com/LoomSDK/LoomSDK "a native mobile app and game framework"
+[loomtasks]: https://github.com/pixeldroid/loomtasks "Rake tasks for working with loomlibs"
+[spec-ls]: https://github.com/pixeldroid/spec-ls "a simple spec framework for Loom"

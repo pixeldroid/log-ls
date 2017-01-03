@@ -1,6 +1,6 @@
-bin/
 lib/build/
-logs/
 releases/
 test/bin/
-TEST-*.xml
+test/TEST-*.xml
+logfile.log
+cli/bin

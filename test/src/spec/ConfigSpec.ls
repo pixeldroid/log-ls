@@ -4,35 +4,53 @@ package
     import pixeldroid.bdd.Thing;
 
     import pixeldroid.util.Config;
+    import pixeldroid.util.log.LogLevel;
+
 
     public static class ConfigSpec
     {
+        private static const it:Thing = Spec.describe('Config');
+
         public static function describe():void
         {
+            before();
+
+            it.should('provide access to the app version', provide_app_version);
+            it.should('provide access to the log level', provide_log_level);
+            it.should('provide access to string values', provide_strings);
+            it.should('provide access to float values', provide_floats);
+            it.should('provide access to integer values', provide_integers);
+        }
+
+
+        private static function before():void
+        {
             Config.fileContents; // force instantiation and file load
+        }
 
-            var it:Thing = Spec.describe('Config');
+        private static function provide_app_version():void
+        {
+            it.expects(Config.appVersion).toEqual('0.0.0');
+        }
 
-            it.should('provide access to the app version', function() {
-                it.expects(Config.appVersion).toEqual('0.0.0');
-            });
+        private static function provide_log_level():void
+        {
+            it.expects(Config.logLevel).toEqual(LogLevel.DEBUG);
+        }
 
-            it.should('provide access to the log level', function() {
-                it.expects(Config.logLevel.toString()).toEqual('DEBUG');
-            });
+        private static function provide_strings():void
+        {
+            it.expects(Config.getString('string')).toEqual('string value');
+        }
 
-            it.should('provide access to string values', function() {
-                it.expects(Config.getString('string')).toEqual('string value');
-            });
+        private static function provide_floats():void
+        {
+            it.expects(Config.getNumber('number')).toEqual(123.456);
+        }
 
-            it.should('provide access to number values', function() {
-                it.expects(Config.getNumber('number')).toEqual(123.456);
-            });
-
-            it.should('provide access to integer values', function() {
-                it.expects(Config.getInteger('integer')).toEqual(789);
-            });
-
+        private static function provide_integers():void
+        {
+            it.expects(Config.getInteger('integer')).toEqual(789);
         }
     }
 }

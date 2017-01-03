@@ -1,0 +1,19 @@
+{
+  "name": "LogDemoCLI",
+  "version": "1.0",
+  "outputDir": "bin",
+  "references": [
+    "System",
+    "Log"
+  ],
+  "modules": [
+    {
+      "name": "LogDemoCLI",
+      "version": "1.0",
+      "sourcePath": [
+        "."
+      ]
+    }
+  ],
+  "executable": true
+}

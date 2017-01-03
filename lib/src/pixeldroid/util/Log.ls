@@ -1,11 +1,18 @@
 package pixeldroid.util
 {
-    import pixeldroid.util.LogLevel;
+
+    import pixeldroid.util.log.BasicFormatter;
+    import pixeldroid.util.log.ConsolePrinter;
+    import pixeldroid.util.log.Formatter;
+    import pixeldroid.util.log.LogLevel;
+    import pixeldroid.util.log.Printer;
 
     /**
         Provides methods for sending formatted log messages at various verbosity levels.
 
         Messages that exceed the current verbosity threshold stored in `level` will be ignored.
+        The default level is `INFO` (allowing `INFO`, `WARN`, `ERROR`, and `FATAL` messages, but
+        not `DEBUG`).
 
         A default formatter is provided. Custom formatters can be used by setting
         the value of the `formatter` property to a Formatter-compliant class instance.
@@ -19,13 +26,13 @@ package pixeldroid.util
         message construction in a closure, any costs associated with forming the message
         are avoided for logging calls above the current verbosity threshold (log level).
     */
-    class Log
+    final static class Log
     {
-        public static const version:String = '1.0.0';
+        public static const version:String = '2.0.0';
 
         public static const defaultFormatter:Formatter = new BasicFormatter();
         public static const defaultPrinter:Printer = new ConsolePrinter();
-        public static const defaultLevel:LogLevel = new LogLevel(2, 'ERROR'); // need to use constructor, as static initialization of this class is prior to availability of member vars in LogLevel
+        public static const defaultLevel:LogLevel = 4; // LogLevel.INFO // static initializer runs before member initialization of imported enum
 
         public static var formatter:Formatter = defaultFormatter;
         public static var printer:Printer = defaultPrinter;
@@ -45,7 +52,7 @@ package pixeldroid.util
         */
         public static function debug(label:String, messageGenerator:Function):void
         {
-            if (level.value >= LogLevel.DEBUG.value) processMessage(LogLevel.DEBUG, label, messageGenerator);
+            if (level >= LogLevel.DEBUG) processMessage(LogLevel.DEBUG, label, messageGenerator);
         }
 
         /**
@@ -61,7 +68,7 @@ package pixeldroid.util
         */
         public static function info(label:String, messageGenerator:Function):void
         {
-            if (level.value >= LogLevel.INFO.value) processMessage(LogLevel.INFO, label, messageGenerator);
+            if (level >= LogLevel.INFO) processMessage(LogLevel.INFO, label, messageGenerator);
         }
 
         /**
@@ -77,7 +84,7 @@ package pixeldroid.util
         */
         public static function warn(label:String, messageGenerator:Function):void
         {
-            if (level.value >= LogLevel.WARN.value) processMessage(LogLevel.WARN, label, messageGenerator);
+            if (level >= LogLevel.WARN) processMessage(LogLevel.WARN, label, messageGenerator);
         }
 
         /**
@@ -93,7 +100,7 @@ package pixeldroid.util
         */
         public static function error(label:String, messageGenerator:Function):void
         {
-            if (level.value >= LogLevel.ERROR.value) processMessage(LogLevel.ERROR, label, messageGenerator);
+            if (level >= LogLevel.ERROR) processMessage(LogLevel.ERROR, label, messageGenerator);
         }
 
         /**
@@ -109,7 +116,45 @@ package pixeldroid.util
         */
         public static function fatal(label:String, messageGenerator:Function):void
         {
-            if (level.value >= LogLevel.FATAL.value) processMessage(LogLevel.FATAL, label, messageGenerator);
+            if (level >= LogLevel.FATAL) processMessage(LogLevel.FATAL, label, messageGenerator);
+        }
+
+        /**
+            Convert a log level enumeration into a human-readable string.
+
+            @param value A verbosity enumeration from LogLevel
+        */
+        public static function levelToString(value:LogLevel):String
+        {
+            switch (value)
+            {
+                case LogLevel.NONE : return 'NONE';
+                case LogLevel.FATAL: return 'FATAL';
+                case LogLevel.ERROR: return 'ERROR';
+                case LogLevel.WARN : return 'WARN';
+                case LogLevel.INFO : return 'INFO';
+                case LogLevel.DEBUG: return 'DEBUG';
+            }
+            return 'NONE';
+        }
+
+        /**
+            Convert a human-readable string into a log level enumeration.
+
+            @param value A string matching one of [NONE, FATAL, ERROR, WARN, INFO, DEBUG]
+        */
+        public static function levelFromString(value:String):LogLevel
+        {
+            switch (value.toUpperCase())
+            {
+                case 'NONE' : return LogLevel.NONE;
+                case 'FATAL': return LogLevel.FATAL;
+                case 'ERROR': return LogLevel.ERROR;
+                case 'WARN' : return LogLevel.WARN;
+                case 'INFO' : return LogLevel.INFO;
+                case 'DEBUG': return LogLevel.DEBUG;
+            }
+            return LogLevel.NONE;
         }
 
 
@@ -120,61 +165,6 @@ package pixeldroid.util
             var time:Number = Platform.getTime(); // milliseconds since app launch
             var message:String = messageGenerator() as String;
             printer.print(formatter.format(time, level, label, message));
-        }
-    }
-
-    /**
-        Declares a receiver function for use by the logger.
-    */
-    interface Printer
-    {
-        /**
-            @param message The message to be printed to a log receiver
-        */
-        function print(message:String):void;
-    }
-
-    /**
-        Declares a message formatting function for use by the logger.
-    */
-    interface Formatter
-    {
-        /**
-            @param time The number of milliseconds since app start
-            @param level A `LogLevel` constant representing verbosity of the message
-            @param label A name for the owner of the message
-            @param message The message to be logged
-        */
-        function format(time:Number, level:LogLevel, label:String, message:String):String;
-    }
-
-
-    class ConsolePrinter implements Printer
-    {
-        public function print(message:String):void
-        {
-            Console.print(message);
-        }
-    }
-
-    class BasicFormatter implements Formatter
-    {
-        public function format(time:Number, level:LogLevel, label:String, message:String):String
-        {
-            var h:Number = Math.floor(time / (60 * 60 * 1000));
-            time -= h * (60 * 60 * 1000);
-            var m:Number = Math.floor(time / (60 * 1000));
-            time -= m * (60 * 1000);
-            var s:Number = Math.floor(time / 1000);
-            time -= s * 1000;
-            var l:Number = time;
-
-            var hh:String = String.lpad(h.toString(), '0', 2);
-            var mm:String = String.lpad(m.toString(), '0', 2);
-            var ss:String = String.lpad(s.toString(), '0', 2);
-            var ll:String = String.lpad(l.toString(), '0', 3);
-
-            return hh +':' + mm + ':' + ss + '.' + ll + ' [' + String.lpad(level.toString(), ' ', 5) + '] ' + label + ': ' + message;
         }
     }
 }

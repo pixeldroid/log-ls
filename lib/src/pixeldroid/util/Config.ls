@@ -1,6 +1,11 @@
 package pixeldroid.util
 {
-    import pixeldroid.util.LogLevel;
+    import system.Debug;
+    import system.JSON;
+    import system.errors.Error;
+
+    import pixeldroid.util.Log;
+    import pixeldroid.util.log.LogLevel;
 
     /**
         Provides access to configuration values defined in `assets/app.config`.
@@ -15,9 +20,9 @@ package pixeldroid.util
         */
         public static function get logLevel():LogLevel
         {
-            var value:String = json.getString('log_level');
+            var level:String = json.getString('log_level');
 
-            return LogLevel.fromString(value);
+            return Log.levelFromString(level);
         }
 
         /**
