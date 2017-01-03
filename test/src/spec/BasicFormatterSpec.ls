@@ -14,7 +14,6 @@ package
     public static final class BasicFormatterSpec
     {
         private static const it:Thing = Spec.describe('BasicFormatter');
-        private static const testPrinter:TestPrinter = new TestPrinter();
         private static const wrap:Function = LogStatePreserver.wrap;
 
         public static function describe():void
@@ -25,6 +24,7 @@ package
 
         private static function provide_default_format():void
         {
+            var testPrinter:TestPrinter = new TestPrinter();
             Log.printer = testPrinter;
 
             Log.level = LogLevel.INFO;

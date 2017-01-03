@@ -18,7 +18,7 @@ package
 
         public static function describe():void
         {
-            it.should('save to file when printed to', save_to_file);
+            it.should('save to file when printed to', wrap(save_to_file) as Function);
             it.should('support appending to the latest line', append_to_line);
             it.should('support replacing the latest line', replace_line);
             it.should('enforce message limits by rolling off oldest messages', roll_off);

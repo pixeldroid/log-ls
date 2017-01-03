@@ -14,7 +14,6 @@ package
     public static final class LogSpec
     {
         private static const it:Thing = Spec.describe('Log');
-        private static const testPrinter:TestPrinter = new TestPrinter();
         private static const wrap:Function = LogStatePreserver.wrap;
         private static var initialLevel:LogLevel;
 
@@ -58,6 +57,7 @@ package
 
         private static function ignore_higher_levels():void
         {
+            var testPrinter:TestPrinter = new TestPrinter();
             Log.printer = testPrinter;
 
             Log.level = LogLevel.INFO;
@@ -80,6 +80,7 @@ package
         {
             var initialValue:Number = 0;
             var captive:Number = initialValue;
+            var testPrinter:TestPrinter = new TestPrinter();
 
             Log.printer = testPrinter;
 
