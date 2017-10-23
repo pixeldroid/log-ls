@@ -15,27 +15,50 @@ package pixeldroid.util
         not `DEBUG`).
 
         A default formatter is provided. Custom formatters can be used by setting
-        the value of the `formatter` property to a Formatter-compliant class instance.
+        the value of the `formatter` property to a `Formatter`-compliant class instance.
 
         A default printer is provided to log to `Console.print()`. Custom printers
-        can be used by setting the value of the `printer` property to a Printer-
-        compliant class instance.
+        can be used by setting the value of the `printer` property to a `Printer`-compliant
+        class instance.
 
         Logging functions expect a label to indicate the owner of the message, and
         a function that should evaluate to a message when called. By capturing the
         message construction in a closure, any costs associated with forming the message
         are avoided for logging calls above the current verbosity threshold (log level).
+
+        @see pixeldroid.util.log.Formatter
+        @see pixeldroid.util.log.Printer
     */
     final static class Log
     {
+        /** Version of the Log library */
         public static const version:String = '2.0.0';
 
+        /**
+        Default formatter. Override by setting value of `formatter`
+        @see #formatter
+        */
         public static const defaultFormatter:Formatter = new BasicFormatter();
+
+        /**
+        Default printer. Override by setting value of `printer`
+        @see #printer
+        */
         public static const defaultPrinter:Printer = new ConsolePrinter();
+
+        /**
+        Default log level. Override by setting value of `level`
+        @see #level
+        */
         public static const defaultLevel:LogLevel = 4; // LogLevel.INFO // static initializer runs before member initialization of imported enum
 
+        /** Current formatter in use. */
         public static var formatter:Formatter = defaultFormatter;
+
+        /** Current printer in use. */
         public static var printer:Printer = defaultPrinter;
+
+        /** Current log level. */
         public static var level:LogLevel = defaultLevel;
 
         /**
@@ -122,7 +145,10 @@ package pixeldroid.util
         /**
             Convert a log level enumeration into a human-readable string.
 
-            @param value A verbosity enumeration from LogLevel
+            @param value A verbosity enumeration from `LogLevel`
+            @return A human readable string indicating the log level
+
+            @see pixeldroid.util.log.LogLevel
         */
         public static function levelToString(value:LogLevel):String
         {
@@ -141,7 +167,10 @@ package pixeldroid.util
         /**
             Convert a human-readable string into a log level enumeration.
 
-            @param value A string matching one of [NONE, FATAL, ERROR, WARN, INFO, DEBUG]
+            @param value A string matching one of [`NONE`, `FATAL`, `ERROR`, `WARN`, `INFO`, `DEBUG`]
+            @return A LogLevel enumeration value
+
+            @see pixeldroid.util.log.LogLevel
         */
         public static function levelFromString(value:String):LogLevel
         {

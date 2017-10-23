@@ -4,3 +4,5 @@ test/bin/
 test/TEST-*.xml
 logfile.log
 cli/bin
+docs-site
+.jekyll-metadata

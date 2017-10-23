@@ -9,6 +9,20 @@ package pixeldroid.util
 
     /**
         Provides access to configuration values defined in `assets/app.config`.
+
+        `app.config` should be a valid JSON file stored under the `assets/` directory.
+
+        A simple example might look like the following:
+
+        ```json
+        {
+           ⇥"app_version": "1.0.0",
+           ⇥"log_level": "DEBUG",
+           ⇥"my_string": "string value",
+           ⇥"my_number": 123.456,
+           ⇥"my_integer": 789
+        }
+        ```
     */
     class Config
     {
@@ -16,7 +30,7 @@ package pixeldroid.util
         private static var _json:JSON;
 
         /**
-            Retrieve the verbosity level to be used for the logging system.
+            Verbosity level to be used for the logging system.
         */
         public static function get logLevel():LogLevel
         {
@@ -26,7 +40,7 @@ package pixeldroid.util
         }
 
         /**
-            Retrieve the raw contents of the app.config file.
+            Raw contents of the `app.config` file.
         */
         public static function get fileContents():String
         {
@@ -50,7 +64,7 @@ package pixeldroid.util
         }
 
         /**
-            Retrieve the app version string.
+            App version string.
         */
         public static function get appVersion():String
         {
@@ -60,7 +74,10 @@ package pixeldroid.util
         }
 
         /**
-            Retrieve an arbitrary string value from app.config.
+            Retrieve an arbitrary string value from `app.config`.
+
+            @param key The key to retrieve a string value for
+            @return The string value for the provided key
         */
         public static function getString(key:String):String
         {
@@ -70,8 +87,11 @@ package pixeldroid.util
         }
 
         /**
-            Retrieve an arbitrary number value from app.config.
-            Note: the number must be defined with a decimal point.
+            Retrieve an arbitrary number value from `app.config`.
+            _Note:_ the number must be defined with a decimal point.
+
+            @param key The key to retrieve a number value for
+            @return The number value for the provided key
         */
         public static function getNumber(key:String):Number
         {
@@ -81,7 +101,10 @@ package pixeldroid.util
         }
 
         /**
-            Retrieve an arbitrary integer value from app.config.
+            Retrieve an arbitrary integer value from `app.config`.
+
+            @param key The key to retrieve an integer value for
+            @return The integer value for the provided key
         */
         public static function getInteger(key:String):Number
         {
