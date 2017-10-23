@@ -1,0 +1,26 @@
+---
+ancestors: 
+  - { module: "system", name: "Object" }
+description: "Provides a file logger with a fixed buffer size for use by `Log`.\n\nLog messages are written to file via `system.platform.File`, which requires\na full file write each time (there is no write-append method for `File`). To\nprevent memory overflow, the printer stores a limited number of messages in a buffer,\nreplacing oldest ones with newest ones when the limit is reached (first in, last out).\n\nMessages can be appended to or replaced. The buffer is written to disk after each print operation."
+fields: 
+  - { attributes: [ "protected" ], description: "The message buffer.\n\nNumber of messages stored in the buffer is capped by `messageLimit`.", name: "data", tags: [ { name: "see", value: "#messageLimit" } ], template_types: { item_types: [ { item_types: [], type: "system.String" } ], type: "system.Vector" }, type: "system.Vector" }
+implements: 
+  - { module: "pixeldroid.util.log", name: "Printer" }
+layout: "type"
+methods: 
+  - { attributes: [ "public" ], description: "Record a log message.\n\nMessage formatting occurs prior to this method being called.", name: "print", parameters: [ { description: "The formatted message to be handled by a log receiver", name: "message", type: "system.String" } ], tags: [ { name: "param", value: "message The formatted message to be handled by a log receiver" }, { name: "copy", value: "pixeldroid.util.log.Printer" } ], type: "system.Void" }
+  - { attributes: [ "public" ], description: "Add on to the latest existing message.\n\nIf called before any message has been logged, `append()` will function as `print()`.", name: "append", parameters: [ { description: "String to be appended to end of latest existing message", name: "message", type: "system.String" } ], type: "system.Void" }
+  - { attributes: [ "public" ], description: "Replace the latest existing message.\n\nIf called before any message has been logged, `replace()` will function as `print()`.", name: "replace", parameters: [ { description: "String to overwrite latest existing message", name: "message", type: "system.String" } ], type: "system.Void" }
+  - { attributes: [ "public" ], description: "Specify the path of the logfile to use.\n\nThe logfile will be created if it doesn't already exist.", name: "setLogfile", parameters: [ { description: "Path to logfile (full or relative to default writeable directory)", name: "filepath", type: "system.String" } ], tags: [ { name: "return", value: "`false` if the file cannot be written to" } ], type: "system.Boolean" }
+  - { attributes: [ "protected" ], description: "Write the current message queue to disk.\n\nCalled after each `print()`, `append()`, or `replace()` operation.", name: "save", tags: [ { name: "return", value: "`true` on write success, `false` on error." } ], type: "system.Boolean" }
+module: "pixeldroid.util.log"
+name: "FilePrinter"
+properties: 
+  - { attributes: [ "public" ], description: "Specify the maximum number of messages to buffer and write.", getter: { attributes: [ "public" ], description: "", name: "__pget_messageLimit", type: "system.Number" }, name: "messageLimit", setter: { attributes: [ "public" ], description: "", name: "__pset_messageLimit", parameters: [ { name: "limit", type: "system.Number" } ], type: "system.Void" }, type: "system.Number" }
+  - { attributes: [ "public" ], description: "Retrieve the current path to the logfile.", getter: { attributes: [ "public" ], description: "", name: "__pget_logfile", type: "system.String" }, is_read_only: true, name: "logfile", type: "system.String" }
+tags: 
+  - { name: "see", value: "system.platform.File#writeTextFile" }
+type: "CLASS"
+type_attributes: 
+  - "private"
+...

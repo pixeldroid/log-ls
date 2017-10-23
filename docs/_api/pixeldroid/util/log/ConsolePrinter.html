@@ -1,0 +1,17 @@
+---
+ancestors: 
+  - { module: "system", name: "Object" }
+description: "Provides a console logger for use by `Log`.\n\nLog messages are sent to stdout via `system.Console`"
+implements: 
+  - { module: "pixeldroid.util.log", name: "Printer" }
+layout: "type"
+methods: 
+  - { attributes: [ "public" ], description: "Record a log message.\n\nMessage formatting occurs prior to this method being called.", name: "print", parameters: [ { description: "The formatted message to be handled by a log receiver", name: "message", type: "system.String" } ], tags: [ { name: "param", value: "message The formatted message to be handled by a log receiver" }, { name: "copy", value: "pixeldroid.util.log.Printer" } ], type: "system.Void" }
+module: "pixeldroid.util.log"
+name: "ConsolePrinter"
+tags: 
+  - { name: "see", value: "system.Console#print" }
+type: "CLASS"
+type_attributes: 
+  - "private"
+...

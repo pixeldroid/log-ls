@@ -1,0 +1,9 @@
+---
+classes: 
+  - { declaration: "pixeldroid/util/Config.ls", description: "Provides access to configuration values defined in `assets/app.config`.\n\n`app.config` should be a valid JSON file stored under the `assets/` directory.\n\nA simple example might look like the following:\n\n```json\n{\n⇥\"app_version\": \"1.0.0\",\n⇥\"log_level\": \"DEBUG\",\n⇥\"my_string\": \"string value\",\n⇥\"my_number\": 123.456,\n⇥\"my_integer\": 789\n}\n```", name: "Config" }
+  - { declaration: "pixeldroid/util/Log.ls", description: "Provides methods for sending formatted log messages at various verbosity levels.\n\nMessages that exceed the current verbosity threshold stored in `level` will be ignored.\nThe default level is `INFO` (allowing `INFO`, `WARN`, `ERROR`, and `FATAL` messages, but\nnot `DEBUG`).\n\nA default formatter is provided. Custom formatters can be used by setting\nthe value of the `formatter` property to a `Formatter`-compliant class instance.\n\nA default printer is provided to log to `Console.print()`. Custom printers\ncan be used by setting the value of the `printer` property to a `Printer`-compliant\nclass instance.\n\nLogging functions expect a label to indicate the owner of the message, and\na function that should evaluate to a message when called. By capturing the\nmessage construction in a closure, any costs associated with forming the message\nare avoided for logging calls above the current verbosity threshold (log level).", name: "Log" }
+layout: "package"
+module: "pixeldroid.util"
+submodules: 
+  - "log"
+...

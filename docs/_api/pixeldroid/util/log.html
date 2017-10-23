@@ -1,0 +1,32 @@
+---
+ancestors: 
+  - { module: "system", name: "Object" }
+description: "Provides methods for sending formatted log messages at various verbosity levels.\n\nMessages that exceed the current verbosity threshold stored in `level` will be ignored.\nThe default level is `INFO` (allowing `INFO`, `WARN`, `ERROR`, and `FATAL` messages, but\nnot `DEBUG`).\n\nA default formatter is provided. Custom formatters can be used by setting\nthe value of the `formatter` property to a `Formatter`-compliant class instance.\n\nA default printer is provided to log to `Console.print()`. Custom printers\ncan be used by setting the value of the `printer` property to a `Printer`-compliant\nclass instance.\n\nLogging functions expect a label to indicate the owner of the message, and\na function that should evaluate to a message when called. By capturing the\nmessage construction in a closure, any costs associated with forming the message\nare avoided for logging calls above the current verbosity threshold (log level)."
+fields: 
+  - { attributes: [ "public", "static", "const" ], description: "Version of the Log library", name: "version", type: "system.String" }
+  - { attributes: [ "public", "static", "const" ], description: "Default formatter. Override by setting value of `formatter`", name: "defaultFormatter", tags: [ { name: "see", value: "#formatter" } ], type: "pixeldroid.util.log.Formatter" }
+  - { attributes: [ "public", "static", "const" ], description: "Default printer. Override by setting value of `printer`", name: "defaultPrinter", tags: [ { name: "see", value: "#printer" } ], type: "pixeldroid.util.log.Printer" }
+  - { attributes: [ "public", "static", "const" ], description: "Default log level. Override by setting value of `level`", name: "defaultLevel", tags: [ { name: "see", value: "#level" } ], type: "pixeldroid.util.log.LogLevel" }
+  - { attributes: [ "public", "static" ], description: "Current formatter in use.", name: "formatter", type: "pixeldroid.util.log.Formatter" }
+  - { attributes: [ "public", "static" ], description: "Current printer in use.", name: "printer", type: "pixeldroid.util.log.Printer" }
+  - { attributes: [ "public", "static" ], description: "Current log level.", name: "level", type: "pixeldroid.util.log.LogLevel" }
+layout: "type"
+methods: 
+  - { attributes: [ "public", "static" ], description: "Submit a message at debug level verbosity (the highest verbosity level).\n\nDEBUG messages help isolate problems in running systems, by showing\nwhat is being executed and the execution context.\n\nDEBUG messages should provide context that makes it easy to spot\nabnormal values or conditions.", name: "debug", parameters: [ { description: "Name of the message owner", name: "label", type: "system.String" }, { description: "A function to generate the message string", name: "messageGenerator", type: "system.Function" } ], type: "system.Void" }
+  - { attributes: [ "public", "static" ], description: "Submit a message at info level verbosity\n\nINFO messages announce--at a high level--what the running system is doing.\nThe system should be able to run at full speed with INFO level logging.\n\nINFO messages should paint a clear picture of normal system operation.", name: "info", parameters: [ { description: "Name of the message owner", name: "label", type: "system.String" }, { description: "A function to generate the message string", name: "messageGenerator", type: "system.Function" } ], type: "system.Void" }
+  - { attributes: [ "public", "static" ], description: "Submit a message at warn level verbosity\n\nWARN messages signal that something unexpected has occurred; the system\nis still operating as expected, but some investigation may be warranted.\n\nWARN messages should be clear about what expectation was invalidated.", name: "warn", parameters: [ { description: "Name of the message owner", name: "label", type: "system.String" }, { description: "A function to generate the message string", name: "messageGenerator", type: "system.Function" } ], type: "system.Void" }
+  - { attributes: [ "public", "static" ], description: "Submit a message at error level verbosity.\n\nERROR messages record that something has gone wrong, the system is unable\nto recover, and an operator needs to investigate and fix something.\n\nERROR messages should be clear about what went wrong and how it can be triaged or fixed.", name: "error", parameters: [ { description: "Name of the message owner", name: "label", type: "system.String" }, { description: "A function to generate the message string", name: "messageGenerator", type: "system.Function" } ], type: "system.Void" }
+  - { attributes: [ "public", "static" ], description: "Submit a message at fatal level verbosity.\n\nFATAL messages document a failure that prevents the system from starting,\nand indicate the system is completely unusable.\n\nFATAL messages should be clear about what assertion was violated.", name: "fatal", parameters: [ { description: "Name of the message owner", name: "label", type: "system.String" }, { description: "A function to generate the message string", name: "messageGenerator", type: "system.Function" } ], type: "system.Void" }
+  - { attributes: [ "public", "static" ], description: "Convert a log level enumeration into a human-readable string.", name: "levelToString", parameters: [ { description: "A verbosity enumeration from `LogLevel`", name: "value", type: "pixeldroid.util.log.LogLevel" } ], tags: [ { name: "return", value: "A human readable string indicating the log level" }, { name: "see", value: "pixeldroid.util.log.LogLevel" } ], type: "system.String" }
+  - { attributes: [ "public", "static" ], description: "Convert a human-readable string into a log level enumeration.", name: "levelFromString", parameters: [ { description: "A string matching one of [`NONE`, `FATAL`, `ERROR`, `WARN`, `INFO`, `DEBUG`]", name: "value", type: "system.String" } ], tags: [ { name: "return", value: "A LogLevel enumeration value" }, { name: "see", value: "pixeldroid.util.log.LogLevel" } ], type: "pixeldroid.util.log.LogLevel" }
+module: "pixeldroid.util"
+name: "Log"
+tags: 
+  - { name: "see", value: "pixeldroid.util.log.Formatter" }
+  - { name: "see", value: "pixeldroid.util.log.Printer" }
+type: "CLASS"
+type_attributes: 
+  - "private"
+  - "static"
+  - "final"
+...

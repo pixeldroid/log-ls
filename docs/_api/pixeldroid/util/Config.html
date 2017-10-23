@@ -1,0 +1,21 @@
+---
+ancestors: 
+  - { module: "system", name: "Object" }
+description: "Provides access to configuration values defined in `assets/app.config`.\n\n`app.config` should be a valid JSON file stored under the `assets/` directory.\n\nA simple example might look like the following:\n\n```json\n{\n⇥\"app_version\": \"1.0.0\",\n⇥\"log_level\": \"DEBUG\",\n⇥\"my_string\": \"string value\",\n⇥\"my_number\": 123.456,\n⇥\"my_integer\": 789\n}\n```"
+fields: []
+layout: "type"
+methods: 
+  - { attributes: [ "public", "static" ], description: "Reload the config values from file.", name: "refresh", type: "system.Void" }
+  - { attributes: [ "public", "static" ], description: "Retrieve an arbitrary string value from `app.config`.", name: "getString", parameters: [ { description: "The key to retrieve a string value for", name: "key", type: "system.String" } ], tags: [ { name: "return", value: "The string value for the provided key" } ], type: "system.String" }
+  - { attributes: [ "public", "static" ], description: "Retrieve an arbitrary number value from `app.config`.\n_Note:_ the number must be defined with a decimal point.", name: "getNumber", parameters: [ { description: "The key to retrieve a number value for", name: "key", type: "system.String" } ], tags: [ { name: "return", value: "The number value for the provided key" } ], type: "system.Number" }
+  - { attributes: [ "public", "static" ], description: "Retrieve an arbitrary integer value from `app.config`.", name: "getInteger", parameters: [ { description: "The key to retrieve an integer value for", name: "key", type: "system.String" } ], tags: [ { name: "return", value: "The integer value for the provided key" } ], type: "system.Number" }
+module: "pixeldroid.util"
+name: "Config"
+properties: 
+  - { attributes: [ "public", "static" ], description: "Verbosity level to be used for the logging system.", getter: { attributes: [ "public", "static" ], description: "", name: "__pget_logLevel", type: "pixeldroid.util.log.LogLevel" }, is_read_only: true, name: "logLevel", type: "pixeldroid.util.log.LogLevel" }
+  - { attributes: [ "public", "static" ], description: "Raw contents of the `app.config` file.", getter: { attributes: [ "public", "static" ], description: "", name: "__pget_fileContents", type: "system.String" }, is_read_only: true, name: "fileContents", type: "system.String" }
+  - { attributes: [ "public", "static" ], description: "App version string.", getter: { attributes: [ "public", "static" ], description: "", name: "__pget_appVersion", type: "system.String" }, is_read_only: true, name: "appVersion", type: "system.String" }
+type: "CLASS"
+type_attributes: 
+  - "private"
+...

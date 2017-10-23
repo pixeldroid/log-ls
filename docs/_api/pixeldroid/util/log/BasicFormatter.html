@@ -1,0 +1,17 @@
+---
+ancestors: 
+  - { module: "system", name: "Object" }
+description: "Provides a basic message formatting function for use by `Log`.\n\nLog messages are prepended with a timestamp, level, and label:\n\n```\n00:00:00.024 [ INFO] .LogDemoCLI: log test!\n00:00:00.025 [DEBUG] .LogDemoCLI: debug statement\n```"
+implements: 
+  - { module: "pixeldroid.util.log", name: "Formatter" }
+layout: "type"
+methods: 
+  - { attributes: [ "public" ], description: "Formats a message prior to printing.", name: "format", parameters: [ { description: "The number of milliseconds since app start", name: "time", type: "system.Number" }, { description: "A `LogLevel` constant representing verbosity of the message", name: "level", type: "pixeldroid.util.log.LogLevel" }, { description: "A name for the owner of the message", name: "label", type: "system.String" }, { description: "The message to be logged", name: "message", type: "system.String" } ], tags: [ { name: "param", value: "time The number of milliseconds since app start" }, { name: "param", value: "level A `LogLevel` constant representing verbosity of the message" }, { name: "param", value: "label A name for the owner of the message" }, { name: "param", value: "message The message to be logged" }, { name: "return", value: "An implementation-dependent formatted string" }, { name: "see", value: "pixeldroid.util.log.LogLevel" }, { name: "copy", value: "pixeldroid.util.log.Formatter" } ], type: "system.String" }
+module: "pixeldroid.util.log"
+name: "BasicFormatter"
+tags: 
+  - { name: "see", value: "pixeldroid.util.Log#formatter" }
+type: "CLASS"
+type_attributes: 
+  - "private"
+...
