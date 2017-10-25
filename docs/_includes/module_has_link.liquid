@@ -13,20 +13,17 @@ returns:
 {%- endcomment -%}
 {%- assign u = include.module_url -%}
 {%- assign found = false -%}
-{%- for collection in site.collections -%}
-  {%- assign collection_root = collection.label | prepend: "/" -%}
-  {%- if collection_root == site.module_root -%}
-    {%- for doc in collection.docs -%}
-      {%- if u == doc.url -%}
-        {%- assign found = true -%}
-        {%- break -%}
-      {%- endif -%}
-      {%- assign u1 = u | append: "/" -%}
-      {%- if u1 == doc.url -%}
-        {%- assign found = true -%}
-        {%- break -%}
-      {%- endif -%}
-    {%- endfor -%}
+{%- assign api_collection = site.module_root | slice: 1, site.module_root.size -%}
+{%- assign api_docs = site.documents | where:"collection",api_collection -%}
+
+{%- for doc in api_docs -%}
+  {%- if u == doc.url -%}
+    {%- assign found = true -%}
+    {%- break -%}
+  {%- endif -%}
+  {%- assign u1 = u | append: "/" -%}
+  {%- if u1 == doc.url -%}
+    {%- assign found = true -%}
     {%- break -%}
   {%- endif -%}
 {%- endfor -%}

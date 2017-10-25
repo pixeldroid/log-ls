@@ -13,7 +13,7 @@ methods:
   - { attributes: [ "public" ], description: "Replace the latest existing message.\n\nIf called before any message has been logged, `replace()` will function as `print()`.", name: "replace", parameters: [ { description: "String to overwrite latest existing message", name: "message", type: "system.String" } ], type: "system.Void" }
   - { attributes: [ "public" ], description: "Specify the path of the logfile to use.\n\nThe logfile will be created if it doesn't already exist.", name: "setLogfile", parameters: [ { description: "Path to logfile (full or relative to default writeable directory)", name: "filepath", type: "system.String" } ], tags: [ { name: "return", value: "`false` if the file cannot be written to" } ], type: "system.Boolean" }
   - { attributes: [ "protected" ], description: "Write the current message queue to disk.\n\nCalled after each `print()`, `append()`, or `replace()` operation.", name: "save", tags: [ { name: "return", value: "`true` on write success, `false` on error." } ], type: "system.Boolean" }
-module: "pixeldroid.util.log"
+module: "pixeldroid.util.log.printers"
 name: "FilePrinter"
 properties: 
   - { attributes: [ "public" ], description: "Specify the maximum number of messages to buffer and write.", getter: { attributes: [ "public" ], description: "", name: "__pget_messageLimit", type: "system.Number" }, name: "messageLimit", setter: { attributes: [ "public" ], description: "", name: "__pset_messageLimit", parameters: [ { name: "limit", type: "system.Number" } ], type: "system.Void" }, type: "system.Number" }

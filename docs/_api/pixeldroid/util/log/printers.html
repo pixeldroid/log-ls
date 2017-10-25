@@ -1,0 +1,8 @@
+---
+classes: 
+  - { declaration: "pixeldroid/util/log/printers/ConsolePrinter.ls", description: "Provides a console logger for use by `Log`.\n\nLog messages are sent to stdout via `system.Console`", name: "ConsolePrinter" }
+  - { declaration: "pixeldroid/util/log/printers/FilePrinter.ls", description: "Provides a file logger with a fixed buffer size for use by `Log`.\n\nLog messages are written to file via `system.platform.File`, which requires\na full file write each time (there is no write-append method for `File`). To\nprevent memory overflow, the printer stores a limited number of messages in a buffer,\nreplacing oldest ones with newest ones when the limit is reached (first in, last out).\n\nMessages can be appended to or replaced. The buffer is written to disk after each print operation.", name: "FilePrinter" }
+  - { declaration: "pixeldroid/util/log/printers/MultiPrinter.ls", description: "Provides a one-to-many facade for logging a single message to multiple printers.", name: "MultiPrinter" }
+layout: "package"
+module: "pixeldroid.util.log.printers"
+...
