@@ -1,7 +1,7 @@
 {%- comment -%}
 
 module_has_link
-  checks site.collections[site.module_root].docs for doc with url attribute that matches include.module_url
+  checks documents in the site.module_root collection for a url attribute that matches include.module_url
 
 params:
   module_url="/api/foo/bar/Baz"
