@@ -3,9 +3,9 @@ package
     import pixeldroid.bdd.Spec;
     import pixeldroid.bdd.Thing;
 
-    import pixeldroid.util.Log;
+    import pixeldroid.util.log.Log;
     import pixeldroid.util.log.LogLevel;
-    import pixeldroid.util.log.FilePrinter;
+    import pixeldroid.util.log.printers.FilePrinter;
     import pixeldroid.util.log.Printer;
 
     import LogStatePreserver;
@@ -13,11 +13,13 @@ package
 
     public static final class FilePrinterSpec
     {
-        private static const it:Thing = Spec.describe('FilePrinter');
+        private static var it:Thing;
         private static const wrap:Function = LogStatePreserver.wrap;
 
-        public static function describe():void
+        public static function specify(specifier:Spec):void
         {
+            it = specifier.describe('FilePrinter');
+
             it.should('save to file when printed to', wrap(save_to_file) as Function);
             it.should('support appending to the latest line', append_to_line);
             it.should('support replacing the latest line', replace_line);

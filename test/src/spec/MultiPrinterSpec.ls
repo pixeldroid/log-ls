@@ -3,9 +3,9 @@ package
     import pixeldroid.bdd.Spec;
     import pixeldroid.bdd.Thing;
 
-    import pixeldroid.util.Log;
+    import pixeldroid.util.log.Log;
     import pixeldroid.util.log.LogLevel;
-    import pixeldroid.util.log.MultiPrinter;
+    import pixeldroid.util.log.printers.MultiPrinter;
     import pixeldroid.util.log.Printer;
 
     import TestPrinter;
@@ -13,12 +13,14 @@ package
 
     public static final class MultiPrinterSpec
     {
-        private static const it:Thing = Spec.describe('MultiPrinter');
+        private static var it:Thing;
         private static const testPrinter1:TestPrinter = new TestPrinter();
         private static const testPrinter2:TestPrinter = new TestPrinter();
 
-        public static function describe():void
+        public static function specify(specifier:Spec):void
         {
+            it = specifier.describe('MultiPrinter');
+
             it.should('proxy multiple printers', proxy_multiple);
             it.should('add and remove printers by id', add_and_remove);
             it.should('auto-create ids by default', create_ids);

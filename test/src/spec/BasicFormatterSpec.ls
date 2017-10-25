@@ -3,7 +3,7 @@ package
     import pixeldroid.bdd.Spec;
     import pixeldroid.bdd.Thing;
 
-    import pixeldroid.util.Log;
+    import pixeldroid.util.log.Log;
     import pixeldroid.util.log.LogLevel;
     import pixeldroid.util.log.Printer;
 
@@ -13,11 +13,13 @@ package
 
     public static final class BasicFormatterSpec
     {
-        private static const it:Thing = Spec.describe('BasicFormatter');
+        private static var it:Thing;
         private static const wrap:Function = LogStatePreserver.wrap;
 
-        public static function describe():void
+        public static function specify(specifier:Spec):void
         {
+            it = specifier.describe('BasicFormatter');
+
             it.should('provide a default format for time, level, label, and message', wrap(provide_default_format) as Function);
         }
 

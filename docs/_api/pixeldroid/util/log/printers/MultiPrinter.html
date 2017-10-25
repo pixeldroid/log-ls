@@ -1,0 +1,31 @@
+---
+ancestors: 
+  - { module: "system", name: "Object" }
+constructor: 
+  attributes: [ "public" ]
+  description: ""
+  name: "MultiPrinter"
+  type: "pixeldroid.util.log.printers.MultiPrinter"
+description: "Provides a one-to-many facade for logging a single message to multiple printers."
+fields: 
+  - { attributes: [ "protected" ], description: "List of message receivers compliant with the `Printer` interface.\n\nAll printers in the list are printed to each time the `print()` method of this class is called.", name: "printers", tags: [ { name: "see", value: "pixeldroid.util.log.Printer" } ], template_types: { item_types: [ { item_types: [], type: "system.String" }, { item_types: [], type: "pixeldroid.util.log.Printer" } ], type: "system.Dictionary" }, type: "system.Dictionary" }
+  - { attributes: [ "protected" ], description: "Value used to generate a default index for the next printer added.", name: "index", type: "system.Number" }
+implements: 
+  - { module: "pixeldroid.util.log", name: "Printer" }
+layout: "type"
+methods: 
+  - { attributes: [ "public" ], description: "Record a log message.\n\nMessage formatting occurs prior to this method being called.", name: "print", parameters: [ { description: "The formatted message to be handled by a log receiver", name: "message", type: "system.String" } ], tags: [ { name: "param", value: "message The formatted message to be handled by a log receiver" }, { name: "copy", value: "pixeldroid.util.log.Printer" } ], type: "system.Void" }
+  - { attributes: [ "public" ], description: "Add a printer to the list of message recievers.\n\nEach printer in the list will record any message send to the `print()` method of this class.", name: "add", parameters: [ { description: "A message receiver compliant with the `Printer` interface", name: "printer", type: "pixeldroid.util.log.Printer" }, { default_value: "null", description: "An optional key to store the printer under. When not provided, a default key is created.", name: "key", type: "system.String" } ], tags: [ { name: "return", value: "The key for the added printer. Can be used for removal." }, { name: "see", value: "pixeldroid.util.log.Printer" } ], type: "system.String" }
+  - { attributes: [ "public" ], description: "Remove all printers from the list of message receivers.", name: "clear", type: "system.Void" }
+  - { attributes: [ "public" ], description: "Remove a printer matching the provided key from the list of message recievers.", name: "remove", parameters: [ { description: "A key to identify the printer to remove", name: "key", type: "system.String" } ], tags: [ { name: "return", value: "The `Printer` instance removed" }, { name: "see", value: "pixeldroid.util.log.Printer" } ], type: "pixeldroid.util.log.Printer" }
+module: "pixeldroid.util.log.printers"
+name: "MultiPrinter"
+properties: 
+  - { attributes: [ "public" ], description: "Count of printers currently in the list of message receivers.", getter: { attributes: [ "public" ], description: "", name: "__pget_numPrinters", type: "system.Number" }, is_read_only: true, name: "numPrinters", tags: [ { name: "return", value: "The number of printers currently in the list of message receivers" } ], type: "system.Number" }
+  - { attributes: [ "public" ], description: "Keys for all printers currently in the list of message receivers.", getter: { attributes: [ "public" ], description: "", name: "__pget_printerKeys", template_types: { item_types: [ { item_types: [], type: "system.String" } ], type: "system.Vector" }, type: "system.Vector" }, is_read_only: true, name: "printerKeys", tags: [ { name: "return", value: "A `Vector` of `String` keys. Keys can be used to remove a printer from the list of message receivers." } ], template_types: { item_types: [ { item_types: [], type: "system.String" } ], type: "system.Vector" }, type: "system.Vector" }
+tags: 
+  - { name: "see", value: "pixeldroid.util.log.Printer" }
+type: "CLASS"
+type_attributes: 
+  - "private"
+...

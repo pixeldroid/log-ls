@@ -1,0 +1,21 @@
+---
+ancestors: 
+  - { module: "system", name: "Object" }
+description: "Enumerates the verbosity levels of the logging system, from `NONE` (least verbose) to `DEBUG` (most verbose).\n\nThe order of increasing verbosity is: `NONE` < `FATAL` < `ERROR` < `WARN` < `INFO` < `DEBUG`.\n- `NONE` indicates no logging should occur.\n- `FATAL` allows only messages related to application crashes.\n- `ERROR` adds messages related to unexpected results that _will_ break expected behavior.\n- `WARN` adds messages related to unexpected results that will _not_ break expected behavior.\n- `INFO` adds messages that track happy path execution.\n- `DEBUG` adds messages that track program state.\n\nUse `Log.levelToString()` to retrieve a text representation of the level."
+fields: 
+  - { attributes: [ "public", "static" ], description: "indicates no logging should occur", name: "NONE", type: "pixeldroid.util.log.LogLevel" }
+  - { attributes: [ "public", "static" ], description: "for messages related to application crashes", name: "FATAL", type: "pixeldroid.util.log.LogLevel" }
+  - { attributes: [ "public", "static" ], description: "for messages related to unexpected results that _will_ break expected behavior", name: "ERROR", type: "pixeldroid.util.log.LogLevel" }
+  - { attributes: [ "public", "static" ], description: "for messages related to unexpected results that will _not_ break expected behavior", name: "WARN", type: "pixeldroid.util.log.LogLevel" }
+  - { attributes: [ "public", "static" ], description: "for messages that track happy path execution", name: "INFO", type: "pixeldroid.util.log.LogLevel" }
+  - { attributes: [ "public", "static" ], description: "for messages that track program state", name: "DEBUG", type: "pixeldroid.util.log.LogLevel" }
+layout: "type"
+module: "pixeldroid.util.log"
+name: "LogLevel"
+tags: 
+  - { name: "see", value: "pixeldroid.util.log.Log#levelToString" }
+  - { name: "see", value: "pixeldroid.util.log.Log#levelFromString" }
+type: "ENUM"
+type_attributes: 
+  - "private"
+...

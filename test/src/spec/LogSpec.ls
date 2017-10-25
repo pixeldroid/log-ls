@@ -3,7 +3,7 @@ package
     import pixeldroid.bdd.Spec;
     import pixeldroid.bdd.Thing;
 
-    import pixeldroid.util.Log;
+    import pixeldroid.util.log.Log;
     import pixeldroid.util.log.LogLevel;
     import pixeldroid.util.log.Printer;
 
@@ -13,13 +13,14 @@ package
 
     public static final class LogSpec
     {
-        private static const it:Thing = Spec.describe('Log');
+        private static var it:Thing;
         private static const wrap:Function = LogStatePreserver.wrap;
         private static var initialLevel:LogLevel;
 
-        public static function describe():void
+        public static function specify(specifier:Spec):void
         {
             before();
+            it = specifier.describe('Log');
 
             it.should('be versioned', be_versioned);
             it.should('default to INFO level logging', default_to_info);

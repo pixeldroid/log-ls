@@ -3,17 +3,18 @@ package
     import pixeldroid.bdd.Spec;
     import pixeldroid.bdd.Thing;
 
-    import pixeldroid.util.Config;
+    import pixeldroid.util.config.Config;
     import pixeldroid.util.log.LogLevel;
 
 
     public static class ConfigSpec
     {
-        private static const it:Thing = Spec.describe('Config');
+        private static var it:Thing;
 
-        public static function describe():void
+        public static function specify(specifier:Spec):void
         {
             before();
+            it = specifier.describe('Config');
 
             it.should('provide access to the app version', provide_app_version);
             it.should('provide access to the log level', provide_log_level);

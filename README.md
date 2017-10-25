@@ -1,7 +1,7 @@
 log-ls
 ======
 
-a simple logging framework for [Loom][loom-sdk], plus a handy config reader
+a simple logging utility for [Loom][loom-sdk], plus a handy config reader
 
 - [installation](#installation)
 - [usage](#usage)
@@ -14,7 +14,7 @@ a simple logging framework for [Loom][loom-sdk], plus a handy config reader
 Download the library into its matching sdk folder:
 
     $ curl -L -o ~/.loom/sdks/sprint34/libs/Log.loomlib \
-        https://github.com/pixeldroid/log-ls/releases/download/v2.0.0/Log-sprint34.loomlib
+        https://github.com/pixeldroid/log-ls/releases/download/v3.0.0/Log-sprint34.loomlib
 
 To uninstall, simply delete the file:
 
@@ -35,8 +35,8 @@ package
 {
     import loom.Application;
 
-    import pixeldroid.util.Log;
-    import pixeldroid.util.LogLevel;
+    import pixeldroid.util.log.Log;
+    import pixeldroid.util.log.LogLevel;
 
 
     public class LogTest extends Application
@@ -74,9 +74,9 @@ package
 {
     import loom.Application;
 
-    import pixeldroid.util.Config;
-    import pixeldroid.util.Log;
-    import pixeldroid.util.LogLevel;
+    import pixeldroid.util.config.Config;
+    import pixeldroid.util.log.Log;
+    import pixeldroid.util.log.LogLevel;
 
 
     public class ConfigTest extends Application

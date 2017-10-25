@@ -1,0 +1,14 @@
+---
+classes: 
+  - { declaration: "pixeldroid/util/log/Log.ls", description: "Provides methods for sending formatted log messages at various verbosity levels.\n\nMessages that exceed the current verbosity threshold stored in `level` will be ignored.\nThe default level is `INFO` (allowing `INFO`, `WARN`, `ERROR`, and `FATAL` messages, but\nnot `DEBUG`).\n\nA default formatter is provided. Custom formatters can be used by setting\nthe value of the `formatter` property to a `Formatter`-compliant class instance.\n\nA default printer is provided to log to `Console.print()`. Custom printers\ncan be used by setting the value of the `printer` property to a `Printer`-compliant\nclass instance.\n\nLogging functions expect a label to indicate the owner of the message, and\na function that should evaluate to a message when called. By capturing the\nmessage construction in a closure, any costs associated with forming the message\nare avoided for logging calls above the current verbosity threshold (log level).", name: "Log" }
+enums: 
+  - { declaration: "pixeldroid/util/log/LogLevel.ls", description: "Enumerates the verbosity levels of the logging system, from `NONE` (least verbose) to `DEBUG` (most verbose).\n\nThe order of increasing verbosity is: `NONE` < `FATAL` < `ERROR` < `WARN` < `INFO` < `DEBUG`.\n- `NONE` indicates no logging should occur.\n- `FATAL` allows only messages related to application crashes.\n- `ERROR` adds messages related to unexpected results that _will_ break expected behavior.\n- `WARN` adds messages related to unexpected results that will _not_ break expected behavior.\n- `INFO` adds messages that track happy path execution.\n- `DEBUG` adds messages that track program state.\n\nUse `Log.levelToString()` to retrieve a text representation of the level.", name: "LogLevel" }
+interfaces: 
+  - { declaration: "pixeldroid/util/log/Formatter.ls", description: "Provides a message formatting function for use by `Log`.\n\nMessage format style is up to the implementing class.", name: "Formatter" }
+  - { declaration: "pixeldroid/util/log/Printer.ls", description: "Provides a receiver function for use by `Log`.\n\nOnce received, the log message handling is up to the implementing class.", name: "Printer" }
+layout: "package"
+module: "pixeldroid.util.log"
+submodules: 
+  - "formatters"
+  - "printers"
+...

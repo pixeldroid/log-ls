@@ -1,10 +1,11 @@
-package pixeldroid.util.log
+package pixeldroid.util.log.formatters
 {
-    import pixeldroid.util.Log;
+    import pixeldroid.util.log.Log;
+    import pixeldroid.util.log.LogLevel;
     import pixeldroid.util.log.Formatter;
 
     /**
-        Provides a basic message formatting function for use by Log.
+        Provides a basic message formatting function for use by `Log`.
 
         Log messages are prepended with a timestamp, level, and label:
 
@@ -13,10 +14,11 @@ package pixeldroid.util.log
         00:00:00.025 [DEBUG] .LogDemoCLI: debug statement
         ```
 
-        @see pixeldroid.util.Log#formatter
+        @see pixeldroid.util.log.Log#formatter
     */
     class BasicFormatter implements Formatter
     {
+        /** @copy pixeldroid.util.log.Formatter */
         public function format(time:Number, level:LogLevel, label:String, message:String):String
         {
             var h:Number = Math.floor(time / (60 * 60 * 1000));

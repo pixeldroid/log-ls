@@ -1,0 +1,17 @@
+---
+descendants: 
+  - { module: "pixeldroid.util.log.printers", name: "ConsolePrinter" }
+  - { module: "pixeldroid.util.log.printers", name: "FilePrinter" }
+  - { module: "pixeldroid.util.log.printers", name: "MultiPrinter" }
+description: "Provides a receiver function for use by `Log`.\n\nOnce received, the log message handling is up to the implementing class."
+layout: "type"
+methods: 
+  - { attributes: [ "public" ], description: "Record a log message.\n\nMessage formatting occurs prior to this method being called.", name: "print", parameters: [ { description: "The formatted message to be handled by a log receiver", name: "message", type: "system.String" } ], type: "system.Void" }
+module: "pixeldroid.util.log"
+name: "Printer"
+tags: 
+  - { name: "see", value: "pixeldroid.util.log.Log#printer" }
+type: "INTERFACE"
+type_attributes: 
+  - "private"
+...

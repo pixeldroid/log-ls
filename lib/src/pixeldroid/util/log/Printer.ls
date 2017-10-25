@@ -1,14 +1,20 @@
 package pixeldroid.util.log
 {
     /**
-        Declares a receiver function for use by Log.
+    Provides a receiver function for use by `Log`.
 
-        @see pixeldroid.util.Log#printer
+    Once received, the log message handling is up to the implementing class.
+
+    @see pixeldroid.util.log.Log#printer
     */
     interface Printer
     {
         /**
-            @param message The message to be printed to a log receiver
+        Record a log message.
+
+        Message formatting occurs prior to this method being called.
+
+        @param message The formatted message to be handled by a log receiver
         */
         function print(message:String):void;
     }
