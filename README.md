@@ -1,7 +1,7 @@
 log-ls
 ======
 
-a simple logging framework for [Loom][loom-sdk], plus a handy config reader
+a simple logging utility for [Loom][loom-sdk], plus a handy config reader
 
 - [installation](#installation)
 - [usage](#usage)
