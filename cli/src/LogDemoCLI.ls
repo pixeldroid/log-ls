@@ -3,11 +3,11 @@ package
     import system.CommandLine;
     import system.application.ConsoleApplication;
 
-    import pixeldroid.util.Log;
-    import pixeldroid.util.log.ConsolePrinter;
-    import pixeldroid.util.log.FilePrinter;
+    import pixeldroid.util.log.Log;
+    import pixeldroid.util.log.printers.ConsolePrinter;
+    import pixeldroid.util.log.printers.FilePrinter;
     import pixeldroid.util.log.LogLevel;
-    import pixeldroid.util.log.MultiPrinter;
+    import pixeldroid.util.log.printers.MultiPrinter;
     import pixeldroid.util.log.Printer;
 
 

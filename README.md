@@ -35,8 +35,8 @@ package
 {
     import loom.Application;
 
-    import pixeldroid.util.Log;
-    import pixeldroid.util.LogLevel;
+    import pixeldroid.util.log.Log;
+    import pixeldroid.util.log.LogLevel;
 
 
     public class LogTest extends Application
@@ -74,9 +74,9 @@ package
 {
     import loom.Application;
 
-    import pixeldroid.util.Config;
-    import pixeldroid.util.Log;
-    import pixeldroid.util.LogLevel;
+    import pixeldroid.util.config.Config;
+    import pixeldroid.util.log.Log;
+    import pixeldroid.util.log.LogLevel;
 
 
     public class ConfigTest extends Application

@@ -1,6 +1,7 @@
-package pixeldroid.util.log
+package pixeldroid.util.log.formatters
 {
-    import pixeldroid.util.Log;
+    import pixeldroid.util.log.Log;
+    import pixeldroid.util.log.LogLevel;
     import pixeldroid.util.log.Formatter;
 
     /**
@@ -13,7 +14,7 @@ package pixeldroid.util.log
         00:00:00.025 [DEBUG] .LogDemoCLI: debug statement
         ```
 
-        @see pixeldroid.util.Log#formatter
+        @see pixeldroid.util.log.Log#formatter
     */
     class BasicFormatter implements Formatter
     {

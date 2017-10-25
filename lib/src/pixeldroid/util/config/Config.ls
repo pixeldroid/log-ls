@@ -1,10 +1,10 @@
-package pixeldroid.util
+package pixeldroid.util.config
 {
     import system.Debug;
     import system.JSON;
     import system.errors.Error;
 
-    import pixeldroid.util.Log;
+    import pixeldroid.util.log.Log;
     import pixeldroid.util.log.LogLevel;
 
     /**

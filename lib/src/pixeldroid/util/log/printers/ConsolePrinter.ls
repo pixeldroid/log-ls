@@ -1,4 +1,4 @@
-package pixeldroid.util.log
+package pixeldroid.util.log.printers
 {
 
     import system.Console;

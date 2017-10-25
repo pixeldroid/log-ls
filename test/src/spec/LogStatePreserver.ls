@@ -1,6 +1,6 @@
 package
 {
-    import pixeldroid.util.Log;
+    import pixeldroid.util.log.Log;
     import pixeldroid.util.log.Formatter;
     import pixeldroid.util.log.LogLevel;
     import pixeldroid.util.log.Printer;

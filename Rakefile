@@ -1,5 +1,5 @@
 LIB_NAME = 'Log'
-LIB_VERSION_FILE = File.join('lib', 'src', 'pixeldroid', 'util', 'Log.ls')
+LIB_VERSION_FILE = File.join('lib', 'src', 'pixeldroid', 'util', 'log', 'Log.ls')
 
 begin
   load(File.join(ENV['HOME'], '.loom', 'tasks', 'loomlib.rake'))

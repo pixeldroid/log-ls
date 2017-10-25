@@ -1,8 +1,8 @@
-package pixeldroid.util
+package pixeldroid.util.log
 {
 
-    import pixeldroid.util.log.BasicFormatter;
-    import pixeldroid.util.log.ConsolePrinter;
+    import pixeldroid.util.log.formatters.BasicFormatter;
+    import pixeldroid.util.log.printers.ConsolePrinter;
     import pixeldroid.util.log.Formatter;
     import pixeldroid.util.log.LogLevel;
     import pixeldroid.util.log.Printer;
@@ -32,7 +32,7 @@ package pixeldroid.util
     final static class Log
     {
         /** Version of the Log library */
-        public static const version:String = '2.0.0';
+        public static const version:String = '3.0.0';
 
         /**
         Default formatter. Override by setting value of `formatter`

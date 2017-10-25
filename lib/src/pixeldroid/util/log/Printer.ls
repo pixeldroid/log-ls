@@ -5,7 +5,7 @@ package pixeldroid.util.log
 
     Once received, the log message handling is up to the implementing class.
 
-    @see pixeldroid.util.Log#printer
+    @see pixeldroid.util.log.Log#printer
     */
     interface Printer
     {

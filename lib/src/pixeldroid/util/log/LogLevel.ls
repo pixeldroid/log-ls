@@ -13,8 +13,8 @@ package pixeldroid.util.log
 
         Use `Log.levelToString()` to retrieve a text representation of the level.
 
-        @see pixeldroid.util.Log#levelToString
-        @see pixeldroid.util.Log#levelFromString
+        @see pixeldroid.util.log.Log#levelToString
+        @see pixeldroid.util.log.Log#levelFromString
     */
     enum LogLevel
     {

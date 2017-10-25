@@ -5,7 +5,7 @@ package pixeldroid.util.log
 
     Message format style is up to the implementing class.
 
-    @see pixeldroid.util.Log#formatter
+    @see pixeldroid.util.log.Log#formatter
     @see pixeldroid.util.log.LogLevel
     */
     interface Formatter
