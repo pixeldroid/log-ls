@@ -3,7 +3,7 @@ log-ls
 
 a simple logging utility for [Loom][loom-sdk], plus a handy config reader
 
-> view the docs at http://pixeldroid.com/log-ls/
+> view the docs at https://pixeldroid.com/log-ls/
 
 - [installation](#installation)
 - [usage](#usage)
